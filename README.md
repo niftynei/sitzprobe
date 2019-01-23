@@ -1,6 +1,6 @@
 # Sitzprobe: a Lightning Network payment rehearsal utility
 
-*Sitzprobe*, noun: (from the German for seated rehearsal) is a rehearsal where the singers sing with the orchestra, focusing attention on integrating the two groups. It is often the first rehearsal where the orchestra and singers rehearse together.[wiki]
+*Sitzprobe*, noun: (from the German for seated rehearsal) is a rehearsal where the singers sing with the orchestra, focusing attention on integrating the two groups. It is often the first rehearsal where the orchestra and singers rehearse together.[source][wiki]
 
 
 `sitzprobe` is a c-lightning plugin that actively sends test payments through the lightning network. The goal is to improve the health of the network by closing channels that are no able to route payment.
@@ -51,8 +51,6 @@ lightning-cli sitzprobe-report
 ### Contributing
 
 Pull requests, issues and feature requests welcome.
-```
-```
 
 
-[wiki](https://en.wikipedia.org/wiki/Sitzprobe)
+[wiki]: https://en.wikipedia.org/wiki/Sitzprobe
