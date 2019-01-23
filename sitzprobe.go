@@ -144,7 +144,7 @@ func onInit(plugin *glightning.Plugin, options map[string]string, config *glight
 
 func reschedule(number int) {
 	if number != 0 {
-		timer := time.NewTimer(time.Duration(freq) * time.Second)
+		timer := time.NewTimer(time.Duration(freq) * time.Minute)
 		// wait for timer to elapse
 		<-timer.C
 	}
