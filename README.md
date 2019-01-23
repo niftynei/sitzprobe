@@ -19,13 +19,15 @@ go build
 This should build a binary named `sitzprobe`. To run lightningd with `sitzprobe` enabled you can either add it to your `lightningd/plugin` directory, or pass it in as a runtime flag.
 
 Option A: symlink to the lightningd plugin directory
+
 ```
 ln -s sitzprobe /path/to/lightningd/sourcecode/plugin
 # then run lightningd normally
 ./path/to/lightningd/sourcecode/lightningd/lightningd --sitzprobe-freq=20 --sitzprobe-amt=10
-``
+```
 
 Option B: tell lightningd what plugins to use at runtime
+
 ```
 lightningd --plugin=/path/to/sitzprobe --sitzprobe-freq=20 --sitzprobe-amt=10
 ```
@@ -46,7 +48,6 @@ Note, this feature is currently incomplete.
 ```
 lightning-cli sitzprobe-report
 ```
-
 
 ### Contributing
 
