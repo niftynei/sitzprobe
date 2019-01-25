@@ -195,9 +195,12 @@ func run(runNumber int, amount uint64) {
 
 	// block until we get a result (should fail)
 	payment, err := ln.WaitSendPay(fakeHash, 0)
-	if err != nil {
-		log.Printf("(RUN%d)Payment successfully failed: %s", runNumber, err.Error())
+	if err, ok := err.(*glightning.PaymentError); ok {
+		log.Printf("(RUN%d)Payment successfully failed with failcode %d: %s", runNumber, err.Data.FailCode, err.Message)
 		logFailure(err.Error())
+	} else if err != nil {
+		log.Printf("(RUN%d)Failure: %s", err.Error())
+		count(UnknownError)
 	} else {
 		log.Printf("(RUN%d)Payment somehow miraculously succeeded wtf. Peer %s reached", runNumber, payment.Destination)
 		count(Success)

@@ -15,6 +15,10 @@ github.com/niftynei/glightning v0.0.0-20190125014326-1f1909f68a12 h1:IrQnkrXmEg+
 github.com/niftynei/glightning v0.0.0-20190125014326-1f1909f68a12/go.mod h1:nOHtsM1ZfMwOxwl6LE72U611ozP+IBj/xVkJ+9vwtd4=
 github.com/niftynei/glightning v0.0.0-20190125014432-85f913f9b88c h1:TSdbfgPmj868nSj08PcMpYyF2+DETCeOSj6KhLoB5dg=
 github.com/niftynei/glightning v0.0.0-20190125014432-85f913f9b88c/go.mod h1:nOHtsM1ZfMwOxwl6LE72U611ozP+IBj/xVkJ+9vwtd4=
+github.com/niftynei/glightning v0.0.0-20190125224946-e1c18ffc796e h1:c9PXwiix2fXu9+jFouov4gTqsRt2OFG0DST2g2PdnCw=
+github.com/niftynei/glightning v0.0.0-20190125224946-e1c18ffc796e/go.mod h1:nOHtsM1ZfMwOxwl6LE72U611ozP+IBj/xVkJ+9vwtd4=
+github.com/niftynei/glightning v0.0.0-20190125225638-08e320e52c9f h1:QIJcFiBlodUXC5BhgyW3VTJ8dvtlWcHE4SO0/+2/mT0=
+github.com/niftynei/glightning v0.0.0-20190125225638-08e320e52c9f/go.mod h1:nOHtsM1ZfMwOxwl6LE72U611ozP+IBj/xVkJ+9vwtd4=
 github.com/niftynei/golight v0.0.0-20190104004445-34c816878e23 h1:/2akPQAmTKDDvAAnJRa3HrshNRN2lT79Muf43Rl2crY=
 github.com/niftynei/golight v0.0.0-20190104004445-34c816878e23/go.mod h1:jEXCWZ6oSlUs+dX3mJt9HRp9L7gOnT9X2m6QOtZUnx8=
 github.com/niftynei/golight v0.0.0-20190108040231-6541a3cca437/go.mod h1:jEXCWZ6oSlUs+dX3mJt9HRp9L7gOnT9X2m6QOtZUnx8=
