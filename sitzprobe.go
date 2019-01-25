@@ -10,6 +10,7 @@ import (
 	"math/rand"
 	"time"
 	"encoding/hex"
+	"regexp"
 )
 
 const (
@@ -22,12 +23,13 @@ const (
 // Note: if you add a new type that's not of type 'failure', you should
 // update countFailures to account for this.
 const (
-	Success string = "Success" // should never happen
-	NoActiveChannelFound string = "No active channel found"
-	ChannelsUnavailable string = "Channels unavailable"
-	NoRouteFound string = "No route found for node"
-	SendPayFailed string = "Sendpay failed"
-	Run string = "Run started"
+	Success string = "success" // should never happen
+	NoActiveChannelFound string = "no_active_channel_found"
+	ChannelsUnavailable string = "channels_unavailable"
+	NoRouteFound string = "no_route_found"
+	SendPayFailed string = "sendpay_call_failed"
+	Run string = "runs_started"
+	UnknownError string = "unknown_error"
 )
 
 // The goal of sitzprobe is to provide a utility
@@ -64,17 +66,8 @@ type ReportResult struct {
 	Runs uint64	`json:"runs"`
 	Successes uint64 `json:"successes"`
 	Failures uint64  `json:"failures"`
-	FailureStats Stats     `json:"fail_stats'`
+	Stats map[string]uint64 `json:"stats"`
 }
-
-type Stats struct {
-	NoChannelFound uint64 `json:"no_channel_found"`
-	ChannelUnavailable uint64 `json:"channels_unavailable"`
-	NoRouteFound uint64 `json:"no_route_found"`
-	SendpayFailure uint64 `json:"sendpay_failure"`
-	// todo: other types
-}
-
 
 func (r *Report) New() interface{} {
 	return &Report{}
@@ -91,12 +84,7 @@ func (r *Report) Call() (jrpc2.Result, error) {
 		Runs: reportSet[Run],
 		Successes: reportSet[Success],
 		Failures: countFailures(),
-		FailureStats: Stats{
-			NoChannelFound: reportSet[NoActiveChannelFound],
-			ChannelUnavailable: reportSet[ChannelsUnavailable],
-			NoRouteFound: reportSet[NoRouteFound],
-			SendpayFailure: reportSet[SendPayFailed],
-		},
+		Stats: reportSet,
 	}, nil
 }
 
@@ -205,16 +193,32 @@ func run(runNumber int, amount uint64) {
 		return
 	}
 
-
 	// block until we get a result (should fail)
 	payment, err := ln.WaitSendPay(fakeHash, 0)
 	if err != nil {
 		log.Printf("(RUN%d)Payment successfully failed: %s", runNumber, err.Error())
-		// todo: figure out how to classify failures
+		logFailure(err.Error())
 	} else {
 		log.Printf("(RUN%d)Payment somehow miraculously succeeded wtf. Peer %s reached", runNumber, payment.Destination)
 		count(Success)
 	}
+}
+
+var pattern *regexp.Regexp = regexp.MustCompile("[A-Z_]+")
+
+func logFailure(errMsg string) {
+	errorType := pattern.FindString(errMsg)
+	switch errorType {
+	case "":
+		count(UnknownError)
+	case "WIRE_UNKNOWN_NEXT_PEER":
+		count(Success)
+	case "WIRE_INCORRECT_OR_UNKNOWN_PAYMENT_DETAILS":
+		count(Success)
+	default:
+		count(errorType)
+	}
+
 }
 
 func randomPayHash() string {
