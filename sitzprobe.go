@@ -211,8 +211,6 @@ func logFailure(errMsg string) {
 	switch errorType {
 	case "":
 		count(UnknownError)
-	case "WIRE_UNKNOWN_NEXT_PEER":
-		count(Success)
 	case "WIRE_INCORRECT_OR_UNKNOWN_PAYMENT_DETAILS":
 		count(Success)
 	default:
